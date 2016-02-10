@@ -1,0 +1,26 @@
+---
+dependencies: []
+
+galaxy_info:
+  author: tylersmith
+  description: OpenBazaar Server
+  company: OBCentral
+  license: MIT
+  min_ansible_version: 2.0
+  galaxy_tags:
+    - openbazaar
+    - market
+    - p2p
+  platforms:
+    - name: Ubuntu
+      versions:
+        - lucid
+        - maverick
+        - natty
+        - oneiric
+        - precise
+        - quantal
+        - raring
+        - saucy
+        - trusty
+        - utopic

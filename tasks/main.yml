@@ -1,0 +1,72 @@
+---
+- name: Install required system packages
+  apt: pkg={{ item  }} state=installed update-cache=yes
+  with_items:
+    - python-dev
+    - python-virtualenv
+    - build-essential
+    - git-core
+    - sqlite3
+    - libffi-dev
+    - libssl-dev
+
+- name: Create the service group
+  group: name={{ openbazaar_group }} state=present
+
+- name: Create the service User
+  user:
+    name={{ openbazaar_user }}
+    home={{ openbazaar_user_home_directory }}
+    groups="{{ openbazaar_group }}"
+    shell=/bin/bash
+    system=yes
+
+- name: Download OpenBazaar
+  git:
+    repo={{ openbazaar_git_url }}
+    dest={{ openbazaar_user_home_directory }}/openbazaar
+    version={{ openbazaar_git_version }}
+
+- name: Install Requirements
+  pip:
+    requirements={{ openbazaar_user_home_directory }}/openbazaar/requirements.txt
+    virtualenv={{ openbazaar_user_home_directory }}/openbazaar/venv
+    state=present
+
+# TODO: Figure out why this is required
+- name: Install html5lib
+  pip:
+    name=html5lib
+    state=present
+    virtualenv={{ openbazaar_user_home_directory }}/openbazaar/venv
+
+- name: Set git directory ownership
+  file:
+    path={{ openbazaar_user_home_directory }}/openbazaar
+    state=directory
+    owner={{ openbazaar_user }}
+    group={{ openbazaar_group }}
+
+- name: Install Config
+  template:
+    src=ob.cfg.j2
+    dest={{ openbazaar_user_home_directory }}/ob.cfg
+    owner={{ openbazaar_user }}
+    group={{ openbazaar_group }}
+    mode=0644
+  notify:
+    - restart server
+
+- name: Creates log directory
+  file: path={{ openbazaar_log_path }} state=directory
+
+- name: Install upstart script
+  template:
+    src=openbazaar_upstart.conf.j2
+    dest=/etc/init/{{ openbazaar_name }}.conf
+    owner={{ openbazaar_user }}
+    group={{ openbazaar_group }}
+    mode=0644
+
+- name: Start Server
+  service: name={{ openbazaar_name }} state=started
