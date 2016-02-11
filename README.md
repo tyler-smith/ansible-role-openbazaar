@@ -1,6 +1,8 @@
 OpenBazaar
 =========
 
+[![Build Status](https://api.travis-ci.org/tyler-smith/ansible-openbazaar.png)](https://api.travis-ci.org/tyler-smith/ansible-openbazaar.png)
+
 OpenBazaar server installation
 
 Role Variables
@@ -40,7 +42,7 @@ Including an example of how to use your role (for instance, with variables passe
 License
 -------
 
-MIT
+BSD
 
 Author Information
 ------------------
