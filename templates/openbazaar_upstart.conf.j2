@@ -8,4 +8,11 @@ respawn
 start on runlevel [2345]
 stop on runlevel [06]
 
-exec ./openbazaar/venv/bin/python ./openbazaar/{{ openbazaar_executable }} start -p {{ openbazaar_dht_port }} {{ openbazaar_additional_flags }}
+exec ./openbazaar/venv/bin/python \
+  ./openbazaar/{{ openbazaar_executable }} start \
+  -p {{ openbazaar_dht_port }} \
+  -r {{ openbazaar_rest_port }} \
+  -w {{ openbazaar_websocket_port }} \
+  -b {{ openbazaar_heartbeat_port }} \
+  -a {{ openbazaar_allowed_ip }} \
+  {{ openbazaar_additional_flags }}

@@ -1,4 +1,5 @@
 ---
+# System requirements
 - name: Install required system packages
   apt: pkg={{ item  }} state=installed update-cache=yes
   with_items:
@@ -10,6 +11,7 @@
     - libffi-dev
     - libssl-dev
 
+# Group and user
 - name: Create the service group
   group: name={{ openbazaar_group }} state=present
 
@@ -21,6 +23,7 @@
     shell=/bin/bash
     system=yes
 
+# Get the source and install app requirements
 - name: Download OpenBazaar
   git:
     repo={{ openbazaar_git_url }}
@@ -47,6 +50,20 @@
     owner={{ openbazaar_user }}
     group={{ openbazaar_group }}
 
+# Firewalling
+- name: Install ufw
+  apt: name=ufw
+
+- name: Allow DHT through UFW
+  ufw: proto=udp port={{ openbazaar_dht_port }} rule=allow
+- name: Allow REST through UFW
+  ufw: proto=tcp port={{ openbazaar_rest_port }} rule=allow
+- name: Allow WebSockets through UFW
+  ufw: proto=tcp port={{ openbazaar_websocket_port }} rule=allow
+- name: Allow Heartbeat through UFW
+  ufw: proto=tcp port={{ openbazaar_heartbeat_port }} rule=allow
+
+# Setup the server process
 - name: Install Config
   template:
     src=ob.cfg.j2
@@ -67,6 +84,8 @@
     owner={{ openbazaar_user }}
     group={{ openbazaar_group }}
     mode=0644
+  notify:
+    - restart server
 
 - name: Start Server
   service: name={{ openbazaar_name }} state=started
