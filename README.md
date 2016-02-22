@@ -22,7 +22,7 @@ openbazaar_user_home_directory: /home/openbazaar
 openbazaar_executable: openbazaard.py
 openbazaar_log_path: /var/log/openbazaar
 
-openbazaar_name: openbazaar
+openbazaar_service_name: openbazaar
 
 openbazaar_dht_port: 28467
 

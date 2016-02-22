@@ -80,7 +80,7 @@
 - name: Install upstart script
   template:
     src=openbazaar_upstart.conf.j2
-    dest=/etc/init/{{ openbazaar_name }}.conf
+    dest=/etc/init/{{ openbazaar_service_name }}.conf
     owner={{ openbazaar_user }}
     group={{ openbazaar_group }}
     mode=0644
@@ -88,4 +88,4 @@
     - restart server
 
 - name: Start Server
-  service: name={{ openbazaar_name }} state=started
+  service: name={{ openbazaar_service_name }} state=started
