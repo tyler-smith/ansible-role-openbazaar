@@ -1,9 +1,9 @@
 ---
 - name: start server
-  service: name={{ openbazaar_service_name }} state=started
+  service: name=openbazaard state=started
 
 - name: stop server
-  service: name={{ openbazaar_service_name }} state=stopped
+  service: name=openbazaard state=stopped
 
 - name: restart server
-  service: name={{ openbazaar_service_name }} state=restarted
+  service: name=openbazaard state=restarted

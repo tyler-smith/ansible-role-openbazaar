@@ -30,12 +30,6 @@ openbazaar_user_home_directory: /home/openbazaar
 openbazaar_username: username
 openbazaar_password: password
 
-# Information for how to manage the service
-openbazaar_executable: openbazaard.py
-openbazaar_log_path: /var/log/openbazaar
-
-openbazaar_service_name: openbazaar
-
 # Port settings
 openbazaar_dht_port: 28467
 openbazaar_rest_port: 18469

@@ -6,11 +6,6 @@ openbazaar_group: openbazaar
 openbazaar_user: openbazaar
 openbazaar_user_home_directory: /home/openbazaar
 
-openbazaar_executable: openbazaard.py
-openbazaar_log_path: /var/log/openbazaar
-
-openbazaar_service_name: openbazaar
-
 openbazaar_dht_port: 28467
 openbazaar_rest_port: 18469
 openbazaar_websocket_port: 18466

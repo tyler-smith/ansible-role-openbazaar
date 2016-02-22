@@ -74,13 +74,13 @@
   notify:
     - restart server
 
-- name: Creates log directory
-  file: path={{ openbazaar_log_path }} state=directory
+# - name: Creates log directory
+#   file: path=/var/log/openbazaar state=directory
 
 - name: Install upstart script
   template:
     src=openbazaar_upstart.conf.j2
-    dest=/etc/init/{{ openbazaar_service_name }}.conf
+    dest=/etc/init/openbazaard.conf
     owner={{ openbazaar_user }}
     group={{ openbazaar_group }}
     mode=0644
@@ -88,4 +88,4 @@
     - restart server
 
 - name: Start Server
-  service: name={{ openbazaar_service_name }} state=started
+  service: name=openbazaard state=started

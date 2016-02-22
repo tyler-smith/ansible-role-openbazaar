@@ -9,7 +9,7 @@ start on runlevel [2345]
 stop on runlevel [06]
 
 exec ./openbazaar/venv/bin/python \
-  ./openbazaar/{{ openbazaar_executable }} start \
+  ./openbazaar/openbazaard.py start \
   -p {{ openbazaar_dht_port }} \
   -r {{ openbazaar_rest_port }} \
   -w {{ openbazaar_websocket_port }} \
