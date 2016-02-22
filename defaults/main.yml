@@ -19,3 +19,6 @@ openbazaar_heartbeat_port: 18470
 openbazaar_additional_flags: -t
 
 openbazaar_allowed_ip: 127.0.0.1
+
+openbazaar_username: username
+openbazaar_password: password
