@@ -56,36 +56,11 @@
 
 - name: Allow DHT through UFW
   ufw: proto=udp port={{ openbazaar_dht_port }} rule=allow
-- name: Allow REST through UFW
-  ufw: proto=tcp port={{ openbazaar_rest_port }} rule=allow
-- name: Allow WebSockets through UFW
-  ufw: proto=tcp port={{ openbazaar_websocket_port }} rule=allow
-- name: Allow Heartbeat through UFW
-  ufw: proto=tcp port={{ openbazaar_heartbeat_port }} rule=allow
 
-# Setup the server process
-- name: Install Config
-  template:
-    src=ob.cfg.j2
-    dest={{ openbazaar_user_home_directory }}/ob.cfg
-    owner={{ openbazaar_user }}
-    group={{ openbazaar_group }}
-    mode=0644
-  notify:
-    - restart server
+- name: Include Server tasks
+  include: tasks/server.yml
+  when: openbazaar_seed == false
 
-# - name: Creates log directory
-#   file: path=/var/log/openbazaar state=directory
-
-- name: Install upstart script
-  template:
-    src=openbazaar_upstart.conf.j2
-    dest=/etc/init/openbazaard.conf
-    owner={{ openbazaar_user }}
-    group={{ openbazaar_group }}
-    mode=0644
-  notify:
-    - restart server
-
-- name: Start Server
-  service: name=openbazaard state=started
+- name: Include Seed tasks
+  include: tasks/seed.yml
+  when: openbazaar_seed == true

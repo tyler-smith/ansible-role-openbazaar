@@ -1,0 +1,38 @@
+---
+- include_vars: seed.yml
+
+- name: Allow HTTP through UFW
+  ufw: proto=tcp port={{ openbazaar_seed_http_port }} rule=allow
+
+- name: Copy seed executable
+  copy:
+    src={{ openbazaar_user_home_directory }}/openbazaar/seed/httpseed.py
+    remote_src=true
+    dest={{ openbazaar_user_home_directory }}/openbazaar/httpseed.py
+    owner={{ openbazaar_user }}
+    group={{ openbazaar_group }}
+    mode=644
+
+- name: Install Config
+  template:
+    src=ob.cfg.j2
+    dest={{ openbazaar_user_home_directory }}/ob.cfg
+    owner={{ openbazaar_user }}
+    group={{ openbazaar_group }}
+    mode=0644
+  notify:
+    - restart seed
+
+# Service setup
+- name: Install upstart script
+  template:
+    src=seed/openbazaar_upstart.conf.j2
+    dest=/etc/init/openbazaarseedd.conf
+    owner={{ openbazaar_user }}
+    group={{ openbazaar_group }}
+    mode=0644
+  notify:
+    - restart seed
+
+- name: Start Seed Server
+  service: name=openbazaarseedd state=started

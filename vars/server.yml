@@ -1,0 +1,6 @@
+---
+openbazaar_rest_port: 18469
+openbazaar_websocket_port: 18466
+openbazaar_heartbeat_port: 18470
+
+openbazaar_allowed_ip: 127.0.0.1

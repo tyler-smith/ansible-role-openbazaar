@@ -7,3 +7,12 @@
 
 - name: restart server
   service: name=openbazaard state=restarted
+
+- name: start seed
+  service: name=openbazaarseedd state=started
+
+- name: stop seed
+  service: name=openbazaarseedd state=stopped
+
+- name: restart seed
+  service: name=openbazaarseedd state=restarted

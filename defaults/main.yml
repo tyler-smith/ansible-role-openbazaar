@@ -7,13 +7,10 @@ openbazaar_user: openbazaar
 openbazaar_user_home_directory: /home/openbazaar
 
 openbazaar_dht_port: 28467
-openbazaar_rest_port: 18469
-openbazaar_websocket_port: 18466
-openbazaar_heartbeat_port: 18470
-
-openbazaar_additional_flags: -t
-
-openbazaar_allowed_ip: 127.0.0.1
 
 openbazaar_username: username
 openbazaar_password: password
+
+openbazaar_additional_flags: -t
+
+openbazaar_seed: false

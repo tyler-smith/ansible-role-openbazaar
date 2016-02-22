@@ -1,0 +1,14 @@
+setuid {{ openbazaar_user }}
+setgid {{ openbazaar_group }}
+
+chdir {{ openbazaar_user_home_directory }}
+
+respawn
+
+start on runlevel [2345]
+stop on runlevel [06]
+
+exec ./openbazaar/venv/bin/python \
+  ./openbazaar/httpseed.py start \
+  -p {{ openbazaar_seed_http_port }} \
+  {{ openbazaar_additional_flags }}
