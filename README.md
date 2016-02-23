@@ -1,7 +1,7 @@
 OpenBazaar
 =========
 
-[![Build Status](https://api.travis-ci.org/tyler-smith/ansible-openbazaar.png)](https://api.travis-ci.org/tyler-smith/ansible-openbazaar.png)
+[![Build Status](https://api.travis-ci.org/tyler-smith/ansible-openbazaar.png)](https://api.travis-ci.org/tyler-smith/ansible-role-openbazaar.png)
 
 OpenBazaar Server Installation Role
 

@@ -37,8 +37,8 @@ script:
 
   # Test correctness
   - stat /home/openbazaar/openbazaar/ob.cfg
-  - stat /etc/init/openbazaar.conf
-  - initctl status openbazaar
+  - stat /etc/init/openbazaard.conf
+  - initctl status openbazaard
 
 notifications:
   webhooks: https://galaxy.ansible.com/api/v1/notifications/
